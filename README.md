@@ -13,12 +13,12 @@ Run the program as seen below and then trigger the screenshot pressing `ctrl+alt
 ```sh
 # with context
 # screenshots are saved at "$PICTURES/python-screenshot/context name/"
-$ python3 -m main.py --context "context name"
+$ python3 -m pyscreenshot --context "context name"
 
 
 # without context
 # screenshots are saved at "$PICTURES/python-screenshot/"
-$ python3 -m main.py
+$ python3 -m pyscreenshot
 ```
 
 ## Demo
