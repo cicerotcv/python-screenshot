@@ -1,30 +1,22 @@
 import os
 import pyautogui
-from datetime import datetime
-
-
-DEFAULT_HOME_DIR = os.environ['USERPROFILE']
-DEFAULT_PICTURES_DIR = os.path.join(DEFAULT_HOME_DIR, "Pictures")
-DEFAULT_OUTPUT_DIR = os.path.join(DEFAULT_PICTURES_DIR, 'python-screenshot')
-
-
-def ensure_dir_exists(path: str):
-    if not os.path.exists(path):
-        os.mkdir(path)
-        print(f"PATH: '{path}' created")
-
-
-def get_filename():
-    now = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
-    return now + ".png"
+from storemanager import StoreManager
+from defaults import *
+from utils import get_context
 
 
 def main():
+
+    context = get_context()
+
     screenshot = pyautogui.screenshot()
 
-    filename = get_filename()
-    full_path = os.path.join(DEFAULT_OUTPUT_DIR, filename)
-    ensure_dir_exists(DEFAULT_OUTPUT_DIR)
+    sm = StoreManager(context)
+
+    filename = sm.get_filename()
+    full_path = sm.get_full_path(filename=filename)
+
+    sm.ensure_dir_exists(sm.output_dir)
 
     screenshot.save(full_path)
 
