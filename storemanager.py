@@ -1,5 +1,5 @@
-from datetime import datetime
 import os
+from datetime import datetime
 
 from defaults import DEFAULT_PICTURES_DIR, DEFAULT_PROGRAM_DIR
 
@@ -15,7 +15,7 @@ class StoreManager:
         return output_dir
 
     def get_filename(self):
-        now = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
+        now = datetime.now().strftime("%Y-%m-%dT%H-%M-%S.%f")
         return now + ".png"
 
     def get_full_path(self, filename):

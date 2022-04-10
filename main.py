@@ -1,26 +1,33 @@
-import os
 import pyautogui
-from storemanager import StoreManager
+
 from defaults import *
+from storemanager import StoreManager
 from utils import get_context
+import keyboard
+import functools
+
+
+def screenshot(sm):
+    screenshot = pyautogui.screenshot()
+    filename = sm.get_filename()
+    full_path = sm.get_full_path(filename=filename)
+    sm.ensure_dir_exists(sm.output_dir)
+    screenshot.save(full_path)
+    print(f"Screenshot saved at {full_path}")
 
 
 def main():
+    try:
+        context = get_context()
+        if context:
+            print(f"Started with context: '{context}'")
 
-    context = get_context()
+        sm = StoreManager(context)
+        keyboard.add_hotkey('ctrl+enter', functools.partial(screenshot, sm))
+        keyboard.wait()
 
-    screenshot = pyautogui.screenshot()
-
-    sm = StoreManager(context)
-
-    filename = sm.get_filename()
-    full_path = sm.get_full_path(filename=filename)
-
-    sm.ensure_dir_exists(sm.output_dir)
-
-    screenshot.save(full_path)
-
-    print(f"Screenshot saved at {full_path}")
+    except KeyboardInterrupt:
+        pass
 
 
 if __name__ == '__main__':
