@@ -3,8 +3,9 @@ import functools
 import keyboard
 import pyautogui
 
-from storemanager import StoreManager
-from utils import get_context
+from pyscreenshot.defaults import DEFAULT_HOME_DIR
+from pyscreenshot.storemanager import StoreManager
+from pyscreenshot.utils import get_context
 
 
 def screenshot(sm):
@@ -16,7 +17,7 @@ def screenshot(sm):
     sm.ensure_dir_exists(sm.output_dir)
 
     screenshot.save(full_path)
-    print(f"Screenshot saved at {full_path}")
+    print(f"Screenshot saved at {full_path.replace(DEFAULT_HOME_DIR, '~')}")
 
 
 def main():

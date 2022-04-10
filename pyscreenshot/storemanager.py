@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-from defaults import DEFAULT_PICTURES_DIR, DEFAULT_PROGRAM_DIR
+from pyscreenshot.defaults import DEFAULT_HOME_DIR, DEFAULT_PICTURES_DIR, DEFAULT_PROGRAM_DIR
 
 
 class StoreManager:
@@ -25,4 +25,4 @@ class StoreManager:
     def ensure_dir_exists(path: str):
         if not os.path.exists(path):
             os.mkdir(path)
-            print(f"Path '{path}' created")
+            print(f"Path '{path.replace(DEFAULT_HOME_DIR, '~')}' created")
